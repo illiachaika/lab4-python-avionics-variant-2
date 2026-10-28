@@ -12,7 +12,13 @@ def get_autopilot_mode(h: float, v: float) -> str:
     - h < 500 та v < 250 -> "Захід на посадку"
     - в інших випадках -> "Ручне управління"
     """
-    ...
+    if h>10000 and v>800:
+        a="Круїз"
+    elif h<500 and v<250:
+        a="Захід на посадку"
+    else:
+        a="Ручне управління"
+    return a
 
 # Задача 2: Декодер команд ступенів (match-case)
 def decode_stage_command(stage_data: tuple) -> str:
