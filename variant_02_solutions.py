@@ -44,7 +44,14 @@ def calc_average_temp(temps: list) -> float:
     Обчислює середню температуру.
     Пропускає некоректні виміри (< -273 або > 3500) за допомогою continue.
     """
-    ...
+    s=0
+    n=0
+    for t in temps:
+        if t<-273 or t>3500: continue
+        s+=t
+        n+=1
+    else:
+        return s/n
 
 # Задача 4: Обчислення прискорення (zip)
 def count_overload_moments(ax: list, ay: list, az: list) -> int:
