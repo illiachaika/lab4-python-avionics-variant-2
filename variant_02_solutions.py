@@ -12,12 +12,19 @@ def get_autopilot_mode(h: float, v: float) -> str:
     - h < 500 та v < 250 -> "Захід на посадку"
     - в інших випадках -> "Ручне управління"
     """
-    if h>10000 and v>800:
-        a="Круїз"
-        if h<500 and v<250: #changed elif to if
-            a="Захід на посадку"
+    if h>10000:
+        if v>800:
+            a="Круїз"
+        else:
+            a="Ручне управління"
     else:
-        a="Ручне управління"
+        if h<500:
+            if v<250:
+               a= "Захід на посадку"
+            else:
+               a="Ручне управління"
+        else:
+            a="Ручне управління"
     return a
 
 # Задача 2: Декодер команд ступенів (match-case)
@@ -36,6 +43,8 @@ def decode_stage_command(stage_data: tuple) -> str:
             a=f"Відстиковка {stage_id}-го ступеня"
         case (stage_id, fuel_level, speed,*_):
             a=f"Ступінь {stage_id}: паливо {fuel_level}%, швидкість {speed} м/с"
+        case _:
+            a="Why?"
     return a
 
 # Задача 3: Середня температура камери згоряння (for / continue)
@@ -51,7 +60,7 @@ def calc_average_temp(temps: list) -> float:
         s+=t
         n+=1
     else:
-        return s/n
+        return s/n #if n!=0 else "Why? Task didnt mention it"
 
 # Задача 4: Обчислення прискорення (zip)
 def count_overload_moments(ax: list, ay: list, az: list) -> int:
