@@ -29,7 +29,14 @@ def decode_stage_command(stage_data: tuple) -> str:
     - stage_id 2 або 3 (через |), fuel == 0 -> "Відстиковка {stage_id}-го ступеня"
     - штатно -> "Ступінь {stage_id}: паливо {fuel}%, швидкість {speed} м/с"
     """
-    ...
+    match stage_data:
+        case (1,0,_):
+            a="Відстиковка 1-го ступеня"
+        case (2|3 as stage_id, 0,_):
+            a=f"Відстиковка {stage_id}-го ступеня"
+        case (stage_id, fuel_level, speed,*_):
+            a=f"Ступінь {stage_id}: паливо {fuel_level}%, швидкість {speed} м/с"
+    return a
 
 # Задача 3: Середня температура камери згоряння (for / continue)
 def calc_average_temp(temps: list) -> float:
