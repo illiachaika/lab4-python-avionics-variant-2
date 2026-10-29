@@ -14,8 +14,8 @@ def get_autopilot_mode(h: float, v: float) -> str:
     """
     if h>10000 and v>800:
         a="Круїз"
-    elif h<500 and v<250:
-        a="Захід на посадку"
+        if h<500 and v<250: #changed elif to if
+            a="Захід на посадку"
     else:
         a="Ручне управління"
     return a
@@ -60,7 +60,10 @@ def count_overload_moments(ax: list, ay: list, az: list) -> int:
     За допомогою zip обчислює a = sqrt(ax^2 + ay^2 + az^2).
     Повертає кількість моментів, коли a > 5g (де g = 9.81 м/с^2).
     """
-    La=[(x**2+y**2+z**2)**(1/2) for x,y,z in zip(ax,ay,az)]
+    La=[]
+    for x,y,z in zip(ax,ay,az):
+        La+=[(x**2+y**2+z**2)**(1/2)] #Totally unnecessary list, could have used filter 
+                                      #but task could have implied a to be stored so let it be
     b=0
     for a in La:
         if a>5*9.81:
