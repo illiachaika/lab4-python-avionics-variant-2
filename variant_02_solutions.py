@@ -60,4 +60,9 @@ def count_overload_moments(ax: list, ay: list, az: list) -> int:
     За допомогою zip обчислює a = sqrt(ax^2 + ay^2 + az^2).
     Повертає кількість моментів, коли a > 5g (де g = 9.81 м/с^2).
     """
-    ...
+    La=[(x**2+y**2+z**2)**(1/2) for x,y,z in zip(ax,ay,az)]
+    b=0
+    for a in La:
+        if a>5*9.81:
+            b+=1
+    return b
