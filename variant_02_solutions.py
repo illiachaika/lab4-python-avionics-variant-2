@@ -59,8 +59,7 @@ def calc_average_temp(temps: list) -> float:
         if t<-273 or t>3500: continue
         s+=t
         n+=1
-    else:
-        return s/n #if n!=0 else "Why? Task didnt mention it"
+    return s/n #if n!=0 else "Why? Task didnt mention it"
 
 # Задача 4: Обчислення прискорення (zip)
 def count_overload_moments(ax: list, ay: list, az: list) -> int:
